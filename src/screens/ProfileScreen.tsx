@@ -65,7 +65,7 @@ export function ProfileScreen() {
       ) : (
         <>
           <Card>
-            <Text style={s.section}>About Servista</Text>
+            <Text style={s.section}>About Servista Mobile Application</Text>
             <Text style={s.aboutText}>Developed by Department of Gestetner Digital, Gestetner of Ceylon PLC.</Text>
             <View style={s.detailRow}>
               <Text style={s.detailLabel}>Version</Text>
