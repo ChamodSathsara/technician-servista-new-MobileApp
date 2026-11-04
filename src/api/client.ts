@@ -43,6 +43,8 @@ export const api={
   ,currentMonthVisits:()=>request<any[]>('/api/technician/me/service-schedules/current-month')
   ,openWork:()=>request<{installationJobs:any[];breakdownJobs:any[];serviceVisits:any[]}>('/api/technician/me/open-work')
   ,ytdPerformance:()=>request<{year:number;installationJobs:PerformanceMetric;breakdownJobs:PerformanceMetric;serviceVisits:PerformanceMetric}>('/api/technician/me/performance/ytd')
+  ,meterCounterTypes:()=>request<Array<{meterCounterTypeId:number;counterCode:string;counterName:string;isActive:boolean}>>('/api/technician/me/meter-counter-types')
+  ,solutionTypes:()=>request<Array<{solutionTypeId:number;solutionCode:string;solutionName:string;isActive:boolean}>>('/api/technician/me/solution-types')
 };
 
 export interface PerformanceMetric { allJobs:number; cancelledJobs:number; eligibleJobs:number; completedJobs:number; percentage:number }
