@@ -38,4 +38,8 @@ export const api={
   createEstimate:(payload:unknown)=>request('/api/technician/me/estimates',{method:'POST',body:JSON.stringify(payload)}),
   meterReadings:(ref:string)=>request<unknown[]>(`/api/meter-readings/machine/${encodeURIComponent(ref)}`),
   changePassword:(payload:unknown)=>request('/api/technician/me/password',{method:'PATCH',body:JSON.stringify(payload)})
+  ,recentBreakdowns:(days=7)=>request<any[]>(`/api/technician/me/breakdowns/recent?days=${days}`)
+  ,recentInstallations:(days=7)=>request<any[]>(`/api/technician/me/installation-jobs/recent?days=${days}`)
+  ,currentMonthVisits:()=>request<any[]>('/api/technician/me/service-schedules/current-month')
+  ,openWork:()=>request<{installationJobs:any[];breakdownJobs:any[];serviceVisits:any[]}>('/api/technician/me/open-work')
 };
