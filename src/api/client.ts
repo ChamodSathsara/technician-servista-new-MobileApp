@@ -36,6 +36,7 @@ export const api={
   startVisit:(id:number,payload:unknown)=>request(`/api/technician/me/service-schedules/${id}/start`,{method:'PATCH',body:JSON.stringify(payload)}),
   completeVisit:(id:number,payload:unknown)=>request(`/api/technician/me/service-schedules/${id}/complete`,{method:'PATCH',body:JSON.stringify(payload)}),
   createEstimate:(payload:unknown)=>request('/api/technician/me/estimates',{method:'POST',body:JSON.stringify(payload)}),
+  estimateOptions:()=>request<EstimateOptions>('/api/technician/me/estimate-options'),
   meterReadings:(ref:string)=>request<unknown[]>(`/api/meter-readings/machine/${encodeURIComponent(ref)}`),
   changePassword:(payload:unknown)=>request('/api/technician/me/password',{method:'PATCH',body:JSON.stringify(payload)})
   ,recentBreakdowns:(days=7)=>request<any[]>(`/api/technician/me/breakdowns/recent?days=${days}`)
@@ -51,3 +52,7 @@ export const api={
 };
 
 export interface PerformanceMetric { allJobs:number; cancelledJobs:number; eligibleJobs:number; completedJobs:number; percentage:number }
+export interface EstimateModel { modelId:number; company:string; modelNumber:string; modelName:string; isActive:boolean }
+export interface EstimateCategory { partCategoryId:number; categoryCode:string; categoryName:string; isActive:boolean }
+export interface EstimatePart { partId:number; partCode:string; partName:string; description:string|null; isActive:boolean; modelIds:number[]; categoryIds:number[] }
+export interface EstimateOptions { models:EstimateModel[]; categories:EstimateCategory[]; parts:EstimatePart[] }
