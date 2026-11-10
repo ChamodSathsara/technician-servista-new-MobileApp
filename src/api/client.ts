@@ -45,6 +45,9 @@ export const api={
   ,ytdPerformance:()=>request<{year:number;installationJobs:PerformanceMetric;breakdownJobs:PerformanceMetric;serviceVisits:PerformanceMetric}>('/api/technician/me/performance/ytd')
   ,meterCounterTypes:()=>request<Array<{meterCounterTypeId:number;counterCode:string;counterName:string;isActive:boolean}>>('/api/technician/me/meter-counter-types')
   ,solutionTypes:()=>request<Array<{solutionTypeId:number;solutionCode:string;solutionDescription:string;solutionName?:string;isActive:boolean}>>('/api/technician/me/solution-types')
+  ,cities:()=>request<Array<{cityId:number;area:string;cityName:string;isActive:boolean}>>('/api/technician/me/cities')
+  ,newSaleWorkflows:()=>request<any[]>('/api/technician/me/new-sale-workflows')
+  ,completeNewSaleInstallation:(workflowId:number,payload:unknown)=>request(`/api/new-sales/workflow/${workflowId}/installation`,{method:'POST',body:JSON.stringify(payload)})
 };
 
 export interface PerformanceMetric { allJobs:number; cancelledJobs:number; eligibleJobs:number; completedJobs:number; percentage:number }
