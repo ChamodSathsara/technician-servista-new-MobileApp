@@ -42,6 +42,7 @@ export const api={
   ,recentBreakdowns:(days=7)=>request<any[]>(`/api/technician/me/breakdowns/recent?days=${days}`)
   ,recentInstallations:(days=7)=>request<any[]>(`/api/technician/me/installation-jobs/recent?days=${days}`)
   ,currentMonthVisits:()=>request<any[]>('/api/technician/me/service-schedules/current-month')
+  ,recentVisits:(days=30)=>request<any[]>(`/api/technician/me/service-schedules/recent?days=${days}`)
   ,openWork:()=>request<{installationJobs:any[];breakdownJobs:any[];serviceVisits:any[]}>('/api/technician/me/open-work')
   ,ytdPerformance:()=>request<{year:number;installationJobs:PerformanceMetric;breakdownJobs:PerformanceMetric;serviceVisits:PerformanceMetric}>('/api/technician/me/performance/ytd')
   ,meterCounterTypes:()=>request<Array<{meterCounterTypeId:number;counterCode:string;counterName:string;isActive:boolean}>>('/api/technician/me/meter-counter-types')
@@ -53,6 +54,7 @@ export const api={
 
 export interface PerformanceMetric { allJobs:number; cancelledJobs:number; eligibleJobs:number; completedJobs:number; percentage:number }
 export interface EstimateModel { modelId:number; company:string; modelNumber:string; modelName:string; isActive:boolean }
+export interface EstimateMachine { machineId:number; machineReferenceNumber:string; modelId:number; modelNumber:string; modelName:string }
 export interface EstimateCategory { partCategoryId:number; categoryCode:string; categoryName:string; isActive:boolean }
 export interface EstimatePart { partId:number; partCode:string; partName:string; description:string|null; isActive:boolean; modelIds:number[]; categoryIds:number[] }
-export interface EstimateOptions { models:EstimateModel[]; categories:EstimateCategory[]; parts:EstimatePart[] }
+export interface EstimateOptions { machines:EstimateMachine[]; models:EstimateModel[]; categories:EstimateCategory[]; parts:EstimatePart[] }
