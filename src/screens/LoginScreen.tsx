@@ -16,19 +16,19 @@ import {colors, spacing} from '../theme';
 
 export function LoginScreen() {
   const {login} = useAuth();
-  const [email, setEmail] = useState('');
+  const [techCode, setTechCode] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
-  const canSubmit = !!email.trim() && !!password && !busy;
+  const canSubmit = !!techCode.trim() && !!password && !busy;
   const submit = async () => {
     if (!canSubmit) return;
     setError('');
     setBusy(true);
     try {
-      await login(email.trim(), password);
+      await login(techCode.trim(), password);
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : 'Login failed. Please try again.');
     } finally {
@@ -66,19 +66,19 @@ export function LoginScreen() {
 
             <View style={s.form}>
               <View style={s.fieldGroup}>
-                <Text style={s.label}>EMAIL ADDRESS</Text>
+                <Text style={s.label}>TECH CODE</Text>
                 <View style={s.inputShell}>
-                  <View style={s.inputIcon}><Text style={s.inputIconText}>@</Text></View>
+                  <View style={s.inputIcon}><Text style={s.inputIconText}>#</Text></View>
                   <TextInput
-                    accessibilityLabel="Email address"
-                    value={email}
-                    onChangeText={value => {setEmail(value); if (error) setError('');}}
-                    placeholder="name@company.com"
+                    accessibilityLabel="Technician code"
+                    value={techCode}
+                    onChangeText={value => {setTechCode(value); if (error) setError('');}}
+                    placeholder="Enter your tech code"
                     placeholderTextColor="#94A09E"
-                    keyboardType="email-address"
+                    keyboardType="default"
                     autoCapitalize="none"
                     autoCorrect={false}
-                    autoComplete="email"
+                    autoComplete="off"
                     returnKeyType="next"
                     style={s.input}
                   />

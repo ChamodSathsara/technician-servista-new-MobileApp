@@ -25,7 +25,7 @@ async function request<T>(path:string, init:RequestInit={}, retry=true):Promise<
 }
 
 export const api={
-  login:(email:string,password:string)=>request<Session>('/api/auth/login',{method:'POST',body:JSON.stringify({email,password,deviceLabel:'ServVista Technician Mobile'})}),
+  login:(techCode:string,password:string)=>request<Session>('/api/auth/login',{method:'POST',body:JSON.stringify({email:techCode,password,deviceLabel:'ServVista Technician Mobile'})}),
   installations:()=>request<unknown[]>('/api/technician/me/installation-jobs'),
   installationStatus:(id:number,status:string,note?:string)=>request(`/api/technician/me/installation-jobs/${id}/status`,{method:'PATCH',body:JSON.stringify({status,note})}),
   completeInstallation:(id:number,payload:unknown)=>request(`/api/technician/me/installation-jobs/${id}/complete`,{method:'POST',body:JSON.stringify(payload)}),
